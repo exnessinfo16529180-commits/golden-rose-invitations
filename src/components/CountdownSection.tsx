@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const TARGET_DATE = new Date("2026-05-14T18:00:00+06:00").getTime();
 
@@ -21,90 +22,152 @@ const CountdownSection = () => {
   }, []);
 
   const units = [
-    { value: timeLeft.days, label: "күн" },
-    { value: timeLeft.hours, label: "сағат" },
-    { value: timeLeft.minutes, label: "минут" },
-    { value: timeLeft.seconds, label: "секунд" },
+    { value: timeLeft.days, label: "КҮН" },
+    { value: timeLeft.hours, label: "САҒАТ" },
+    { value: timeLeft.minutes, label: "МИНУТ" },
+    { value: timeLeft.seconds, label: "СЕКУНД" },
   ];
 
   return (
-    <section className="relative w-full py-14" style={{ backgroundColor: "#C23B5A" }}>
+    <section
+      style={{
+        minHeight: '100svh',
+        backgroundColor: '#1a0f0a',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '48px 24px',
+      }}
+    >
       {/* Gold top border */}
-      <div
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+        background: 'linear-gradient(90deg, transparent, #D4AF37 20%, #f5e070 50%, #D4AF37 80%, transparent)',
+      }} />
+
+      {/* Rose decoration at top */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        style={{ marginBottom: 24, textAlign: 'center' }}
+      >
+        <span style={{ color: '#C23B5A', fontSize: '1.6rem' }}>❀</span>
+        <div style={{
+          width: 120,
+          height: 1,
+          background: 'linear-gradient(90deg, transparent, #C23B5A, transparent)',
+          margin: '8px auto 0',
+        }} />
+      </motion.div>
+
+      {/* Heading */}
+      <motion.p
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: "linear-gradient(90deg, transparent 0%, #D4AF37 20%, #f0d060 50%, #D4AF37 80%, transparent 100%)",
+          fontFamily: "'Playfair Display', serif",
+          fontSize: 'clamp(0.72rem, 3vw, 0.9rem)',
+          color: '#D4AF37',
+          letterSpacing: '0.22em',
+          textAlign: 'center',
+          fontWeight: 600,
+          textTransform: 'uppercase',
+          marginBottom: 40,
         }}
-      />
+      >
+        ТОЙ САЛТАНАТЫНА ДЕЙІН:
+      </motion.p>
 
-      <div className="mx-auto px-6 text-center" style={{ maxWidth: 480 }}>
-        {/* Heading */}
-        <p
-          className="uppercase tracking-widest mb-10"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(0.75rem, 3vw, 0.9rem)",
-            color: "rgba(255,255,255,0.85)",
-            letterSpacing: "0.22em",
-            fontWeight: 600,
-          }}
-        >
-          ТОЙ САЛТАНАТЫНА ДЕЙІН:
-        </p>
-
-        {/* Countdown numbers */}
-        <div className="flex justify-center gap-4 flex-wrap">
-          {units.map((unit) => (
-            <div key={unit.label} className="text-center">
+      {/* Countdown boxes */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 16,
+        flexWrap: 'wrap',
+        width: '100%',
+        maxWidth: 420,
+      }}>
+        {units.map((unit, i) => (
+          <motion.div
+            key={unit.label}
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: i * 0.1 }}
+            style={{
+              textAlign: 'center',
+              minWidth: 72,
+              flex: '1 1 72px',
+              maxWidth: 90,
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: '#2a1510',
+                border: '1px solid rgba(212,175,55,0.45)',
+                borderRadius: 12,
+                padding: '14px 8px 10px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.15)',
+                marginBottom: 8,
+              }}
+            >
               <div
-                className="tabular-nums gold-shimmer"
+                className="pulse-gold tabular-nums"
                 style={{
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: "clamp(2.8rem, 12vw, 4rem)",
+                  fontSize: 'clamp(2.2rem, 10vw, 3rem)',
                   fontWeight: 700,
-                  color: "#D4AF37",
+                  color: '#D4AF37',
                   lineHeight: 1,
-                  minWidth: "4rem",
                 }}
               >
-                {String(unit.value).padStart(2, "0")}
-              </div>
-              <div
-                className="mt-2 uppercase tracking-wider"
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
-                  color: "rgba(255,255,255,0.75)",
-                  letterSpacing: "0.15em",
-                }}
-              >
-                {unit.label}
+                {String(unit.value).padStart(2, '0')}
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Gold ornament */}
-        <div className="mt-10">
-          <span style={{ color: "#D4AF37", fontSize: "1.2rem" }}>✦</span>
-        </div>
+            <div
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(0.55rem, 2.2vw, 0.68rem)',
+                color: 'rgba(212,175,55,0.75)',
+                letterSpacing: '0.12em',
+                fontWeight: 600,
+              }}
+            >
+              {unit.label}
+            </div>
+          </motion.div>
+        ))}
       </div>
 
+      {/* Gold ornament */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        style={{ marginTop: 40, textAlign: 'center' }}
+      >
+        <div style={{
+          width: 120,
+          height: 1,
+          background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)',
+          margin: '0 auto 8px',
+        }} />
+        <span style={{ color: '#D4AF37', fontSize: '1.2rem' }}>✦</span>
+      </motion.div>
+
       {/* Gold bottom border */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: "linear-gradient(90deg, transparent 0%, #D4AF37 20%, #f0d060 50%, #D4AF37 80%, transparent 100%)",
-        }}
-      />
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: 3,
+        background: 'linear-gradient(90deg, transparent, #D4AF37 20%, #f5e070 50%, #D4AF37 80%, transparent)',
+      }} />
     </section>
   );
 };
