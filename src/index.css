@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -197,3 +197,20 @@
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(-4px) rotate(-1deg); }
+}
+@keyframes pulse-gold {
+  0%, 100% { text-shadow: 0 0 20px rgba(212,175,55,0.4); }
+  50% { text-shadow: 0 0 40px rgba(212,175,55,0.8), 0 0 80px rgba(212,175,55,0.3); }
+}
+@keyframes rose-shimmer {
+  0%, 100% { text-shadow: 0 0 15px rgba(194,59,90,0.3); }
+  50% { text-shadow: 0 0 30px rgba(194,59,90,0.7), 0 0 60px rgba(194,59,90,0.2); }
+}
+.float-anim { animation: float 6s ease-in-out infinite; }
+.pulse-gold { animation: pulse-gold 3s ease-in-out infinite; }
+.rose-shimmer { animation: rose-shimmer 3s ease-in-out infinite; }
