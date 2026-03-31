@@ -66,16 +66,12 @@ const Index = () => {
   }, [scrollUnlocked]);
 
   return (
-    <div className="relative min-h-screen" style={{ backgroundColor: scrollUnlocked ? '#FDF8F0' : '#1a0f0a' }}>
+    <div className="relative min-h-screen" style={{ backgroundColor: scrollUnlocked ? '#FFFFFF' : '#1a0f0a' }}>
       <HeroSection phase={heroPhase} onVideoEnd={handleVideoEnd} />
 
       {scrollUnlocked && (
-        <div ref={contentRef} className="relative paper-texture" style={{ backgroundColor: '#FDF8F0' }}>
+        <div ref={contentRef} className="relative" style={{ backgroundColor: '#FFFFFF' }}>
           <FloatingPetals />
-          
-          <ScrollReveal>
-            <CountdownSection />
-          </ScrollReveal>
 
           <ScrollReveal>
             <InvitationSection />
@@ -89,12 +85,20 @@ const Index = () => {
             <RsvpSection />
           </ScrollReveal>
 
+          <ScrollReveal>
+            <CountdownSection />
+          </ScrollReveal>
+
           {/* Footer */}
-          <div className="py-12 text-center" style={{ color: '#2C1810' }}>
-            <div className="ornamental-divider max-w-xs mx-auto mb-6">
-              <span style={{ color: '#D4AF37' }}>✦</span>
-            </div>
-            <p className="text-sm opacity-60" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <div className="py-10 text-center" style={{ backgroundColor: '#C23B5A' }}>
+            <p
+              className="text-sm"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                color: "rgba(255,255,255,0.7)",
+                letterSpacing: "0.08em",
+              }}
+            >
               © 2026 — Гүлсара апамыздың 75 жылдық мерейтойы
             </p>
           </div>
