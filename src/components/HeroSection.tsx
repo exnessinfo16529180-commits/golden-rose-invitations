@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface HeroSectionProps {
@@ -6,8 +7,60 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (phase !== 1) return;
+
+    const video = videoRef.current;
+
+    // Fallback: if video can't play (autoplay blocked on mobile), advance after 3s
+    const fallbackTimer = setTimeout(() => {
+      onVideoEnd();
+    }, 3000);
+
+    const handleCanPlay = () => {
+      // Video is playing — clear fallback timer, let it end naturally
+      clearTimeout(fallbackTimer);
+    };
+
+    const handleError = () => {
+      clearTimeout(fallbackTimer);
+      onVideoEnd();
+    };
+
+    if (video) {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            clearTimeout(fallbackTimer);
+          })
+          .catch(() => {
+            // Autoplay blocked — advance immediately
+            clearTimeout(fallbackTimer);
+            onVideoEnd();
+          });
+      }
+      video.addEventListener("canplay", handleCanPlay);
+      video.addEventListener("error", handleError);
+    }
+
+    return () => {
+      clearTimeout(fallbackTimer);
+      if (video) {
+        video.removeEventListener("canplay", handleCanPlay);
+        video.removeEventListener("error", handleError);
+      }
+    };
+  }, [phase, onVideoEnd]);
+
   return (
-    <div className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: '#1a0f0a' }}>
+    <div
+      className="relative h-screen w-full overflow-hidden"
+      style={{ backgroundColor: '#1a0f0a' }}
+      onClick={phase === 1 ? onVideoEnd : undefined}
+    >
       {/* Phase 1: Video */}
       <AnimatePresence>
         {phase === 1 && (
@@ -17,6 +70,7 @@ const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
             transition={{ duration: 1 }}
           >
             <video
+              ref={videoRef}
               className="h-full w-full object-cover"
               src="/hero-video.mp4"
               autoPlay
@@ -26,6 +80,15 @@ const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
               onEnded={onVideoEnd}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+            {/* Tap hint for mobile */}
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-center">
+              <span
+                className="text-xs tracking-[0.2em] uppercase opacity-60"
+                style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
+              >
+                Экранға басыңыз
+              </span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
