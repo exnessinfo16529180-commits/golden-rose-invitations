@@ -3,6 +3,13 @@ const InvitationSection = () => {
     <section className="py-16 px-4 relative z-10">
       <div className="max-w-2xl mx-auto text-center space-y-6">
         <p
+          className="text-lg md:text-xl leading-relaxed"
+          style={{ color: '#2C1810', fontFamily: "'Playfair Display', serif" }}
+        >
+          Құрметті агайын-туыс, бауырлар, куда-жекежат, нағашы-жиен, бөлелер, құрбы-құрдас, дос-жарандар, әріптестер, көршілер!
+        </p>
+
+        <p
           className="text-xl md:text-2xl leading-relaxed"
           style={{ color: '#2C1810', fontFamily: "'Playfair Display', serif" }}
         >
