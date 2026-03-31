@@ -59,7 +59,7 @@ const InvitationSection = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '32px 24px',
+        padding: '8px 20px',
         position: 'relative',
       }}>
         {/* Side rose decorations */}
@@ -74,7 +74,7 @@ const InvitationSection = () => {
         </div>
 
         {/* Greeting lines - stagger animate */}
-        <div style={{ textAlign: 'center', marginBottom: 20 }}>
+        <div style={{ textAlign: 'center', marginBottom: 6 }}>
           {LINES.map((line, i) => (
             <motion.p
               key={i}
@@ -84,9 +84,9 @@ const InvitationSection = () => {
               transition={{ delay: i * 0.12, duration: 0.7, ease: 'easeOut' }}
               style={{
                 fontFamily: "'Great Vibes', cursive",
-                fontSize: i === 0 ? 'clamp(2rem, 8vw, 2.4rem)' : 'clamp(1.4rem, 6vw, 1.9rem)',
+                fontSize: i === 0 ? 'clamp(2.6rem, 10vw, 3.2rem)' : 'clamp(1.9rem, 7.5vw, 2.4rem)',
                 color: '#C23B5A',
-                lineHeight: 1.7,
+                lineHeight: 1.35,
                 margin: 0,
               }}
             >
@@ -101,7 +101,7 @@ const InvitationSection = () => {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          style={{ width: 180, height: 1, background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)', margin: '16px auto' }}
+          style={{ width: 180, height: 1, background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)', margin: '8px auto' }}
         />
         <motion.span
           initial={{ opacity: 0, scale: 0 }}

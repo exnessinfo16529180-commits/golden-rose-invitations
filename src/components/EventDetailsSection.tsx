@@ -243,7 +243,7 @@ const EventDetailsSection = () => {
             lineHeight: 1.7,
             fontWeight: 500,
           }}>
-            «Бәйтерек сарайы»<br />мейрамханасы
+            Астана қаласы,<br />«Бәйтерек сарайы»<br />мейрамханасы
           </p>
         </motion.div>
 

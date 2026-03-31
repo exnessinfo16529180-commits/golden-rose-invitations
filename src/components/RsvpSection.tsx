@@ -5,12 +5,16 @@ import RoseDecoration from "@/components/RoseDecoration";
 
 type AttendingOption = "yes" | "with-spouse" | "no";
 
+// Замените на URL вашего Google Apps Script Web App
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/PASTE_YOUR_SCRIPT_ID_HERE/exec";
+
 const RsvpSection = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+7 ");
   const [attending, setAttending] = useState<AttendingOption>("yes");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlePhoneChange = (val: string) => {
     const digits = val.replace(/\D/g, "").slice(1);
@@ -22,13 +26,26 @@ const RsvpSection = () => {
     setPhone(formatted);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const attendingLabel = (v: AttendingOption) =>
+    v === "yes" ? "Қатысамын" : v === "with-spouse" ? "Жұбайымен боламын" : "Келе алмаймын";
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    const payload = { name, phone, attending: attendingLabel(attending) };
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    } catch (_) {
+      // no-cors always throws — ignore
+    }
+    setLoading(false);
     setSubmitted(true);
-    toast({
-      title: "Рақмет!",
-      description: "Сіздің жауабыңыз қабылданды.",
-    });
+    toast({ title: "Рақмет!", description: "Сіздің жауабыңыз қабылданды." });
   };
 
   if (submitted) {
@@ -284,7 +301,7 @@ const RsvpSection = () => {
               transition: 'all 0.3s ease',
             }}
           >
-            ЖІБЕРУ
+            {loading ? "ЖІБЕРІЛУДЕ..." : "ЖІБЕРУ"}
           </motion.button>
         </form>
 
