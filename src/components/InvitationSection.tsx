@@ -13,7 +13,7 @@ const InvitationSection = () => {
           className="text-xl md:text-2xl leading-relaxed"
           style={{ color: '#2C1810', fontFamily: "'Playfair Display', serif" }}
         >
-          Аяулы анамыз
+          Сіздерді аяулы анамыз
         </p>
 
         <h2
@@ -27,9 +27,7 @@ const InvitationSection = () => {
           className="text-xl md:text-2xl leading-relaxed"
           style={{ color: '#2C1810', fontFamily: "'Playfair Display', serif" }}
         >
-          мерейтойын
-          <br />
-          бірге тойлауға шақырамыз.
+          75 жылдық мерейтойына арналған салтанатты ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!
         </p>
 
         <div className="py-6">
