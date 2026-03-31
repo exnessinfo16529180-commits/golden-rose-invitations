@@ -72,11 +72,11 @@ const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
             <video
               ref={videoRef}
               className="h-full w-full object-cover"
-              src="/hero-video.mp4"
+              src={import.meta.env.BASE_URL + "hero-video.mp4"}
               autoPlay
               muted
               playsInline
-              poster="/hero-portrait.png"
+              poster={import.meta.env.BASE_URL + "hero-portrait.png"}
               onEnded={onVideoEnd}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
@@ -98,7 +98,7 @@ const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
         <div className="absolute inset-0">
           <div className="absolute inset-0 hero-image-zoom">
             <img
-              src="/hero-portrait.png"
+              src={import.meta.env.BASE_URL + "hero-portrait.png"}
               alt="Гүлсара апа"
               className="h-full w-full object-cover"
             />
