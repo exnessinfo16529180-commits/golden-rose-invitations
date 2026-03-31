@@ -28,33 +28,83 @@ const CountdownSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 relative z-10">
-      <div className="ornamental-divider max-w-md mx-auto mb-12">
-        <span style={{ color: '#D4AF37', fontSize: '1.5rem' }}>✦</span>
+    <section className="relative w-full py-14" style={{ backgroundColor: "#C23B5A" }}>
+      {/* Gold top border */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background: "linear-gradient(90deg, transparent 0%, #D4AF37 20%, #f0d060 50%, #D4AF37 80%, transparent 100%)",
+        }}
+      />
+
+      <div className="mx-auto px-6 text-center" style={{ maxWidth: 480 }}>
+        {/* Heading */}
+        <p
+          className="uppercase tracking-widest mb-10"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(0.75rem, 3vw, 0.9rem)",
+            color: "rgba(255,255,255,0.85)",
+            letterSpacing: "0.22em",
+            fontWeight: 600,
+          }}
+        >
+          ТОЙ САЛТАНАТЫНА ДЕЙІН:
+        </p>
+
+        {/* Countdown numbers */}
+        <div className="flex justify-center gap-4 flex-wrap">
+          {units.map((unit) => (
+            <div key={unit.label} className="text-center">
+              <div
+                className="tabular-nums gold-shimmer"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(2.8rem, 12vw, 4rem)",
+                  fontWeight: 700,
+                  color: "#D4AF37",
+                  lineHeight: 1,
+                  minWidth: "4rem",
+                }}
+              >
+                {String(unit.value).padStart(2, "0")}
+              </div>
+              <div
+                className="mt-2 uppercase tracking-wider"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
+                  color: "rgba(255,255,255,0.75)",
+                  letterSpacing: "0.15em",
+                }}
+              >
+                {unit.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Gold ornament */}
+        <div className="mt-10">
+          <span style={{ color: "#D4AF37", fontSize: "1.2rem" }}>✦</span>
+        </div>
       </div>
 
-      <div className="flex justify-center gap-4 md:gap-8 flex-wrap">
-        {units.map((unit) => (
-          <div key={unit.label} className="text-center">
-            <div
-              className="text-5xl md:text-7xl font-bold gold-shimmer tabular-nums"
-              style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
-            >
-              {String(unit.value).padStart(2, "0")}
-            </div>
-            <div
-              className="text-sm md:text-base mt-2 tracking-[0.15em] uppercase"
-              style={{ color: '#2C1810', opacity: 0.7, fontFamily: "'Playfair Display', serif" }}
-            >
-              {unit.label}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="ornamental-divider max-w-md mx-auto mt-12">
-        <span style={{ color: '#D4AF37', fontSize: '1.5rem' }}>✦</span>
-      </div>
+      {/* Gold bottom border */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background: "linear-gradient(90deg, transparent 0%, #D4AF37 20%, #f0d060 50%, #D4AF37 80%, transparent 100%)",
+        }}
+      />
     </section>
   );
 };
