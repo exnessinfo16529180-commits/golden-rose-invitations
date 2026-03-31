@@ -4,7 +4,14 @@ const InvitationSection = () => {
   return (
     <section
       className="relative w-full"
-      style={{ backgroundColor: "#FFFFFF", fontFamily: "'Playfair Display', serif" }}
+      style={{
+        backgroundColor: "#FFFFFF",
+        fontFamily: "'Playfair Display', serif",
+        minHeight: '100svh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
     >
       {/* Watercolor rose header splash */}
       <div className="relative w-full overflow-hidden" style={{ minHeight: 180 }}>

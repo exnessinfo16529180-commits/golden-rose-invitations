@@ -6,6 +6,7 @@ import InvitationSection from "@/components/InvitationSection";
 import EventDetailsSection from "@/components/EventDetailsSection";
 import RsvpSection from "@/components/RsvpSection";
 import FloatingPetals from "@/components/FloatingPetals";
+import KazakhOrnamentBg from "@/components/KazakhOrnament";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => {
@@ -72,6 +73,7 @@ const Index = () => {
       {scrollUnlocked && (
         <div ref={contentRef} className="relative" style={{ backgroundColor: '#FFFFFF' }}>
           <FloatingPetals />
+          <KazakhOrnamentBg />
 
           <ScrollReveal>
             <InvitationSection />

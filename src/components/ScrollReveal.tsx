@@ -16,7 +16,7 @@ const ScrollReveal = ({ children }: { children: ReactNode }) => {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.08 }
     );
 
     observer.observe(el);
@@ -26,9 +26,9 @@ const ScrollReveal = ({ children }: { children: ReactNode }) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 60, scale: 0.96, filter: "blur(4px)" }}
+      animate={isVisible ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" } : {}}
+      transition={{ duration: 1.0, ease: "easeOut" }}
     >
       {children}
     </motion.div>
