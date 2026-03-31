@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import RoseDecoration from "@/components/RoseDecoration";
 
 const MAY_2026_DAYS: (number | null)[] = [
@@ -13,172 +14,264 @@ const HIGHLIGHT_DAY = 14;
 
 const EventDetailsSection = () => {
   return (
-    <section
-      className="relative w-full py-10"
-      style={{ backgroundColor: "#FFFFFF", fontFamily: "'Playfair Display', serif" }}
-    >
-      <div className="relative mx-auto px-6" style={{ maxWidth: 480 }}>
-
-        {/* Side rose decorations */}
-        <div className="absolute left-0 top-4" style={{ pointerEvents: "none" }}>
-          <RoseDecoration width={46} count={2} opacity={0.47} />
+    <>
+      {/* Part A - Dark rose background: Той салтанаты */}
+      <section style={{
+        minHeight: '100svh',
+        backgroundColor: '#4A0020',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '48px 24px',
+      }}>
+        {/* Subtle rose decorations at corners */}
+        <div style={{ position: 'absolute', top: 16, left: 8, opacity: 0.25, pointerEvents: 'none' }}>
+          <RoseDecoration width={52} count={2} opacity={1} />
         </div>
-        <div className="absolute right-0 top-4" style={{ pointerEvents: "none" }}>
-          <RoseDecoration width={46} count={2} opacity={0.47} flip />
-        </div>
-
-        {/* Section heading */}
-        <div className="text-center mb-7">
-          <h2
-            style={{
-              fontFamily: "'Great Vibes', cursive",
-              fontSize: "clamp(1.9rem, 7.5vw, 2.6rem)",
-              color: "#C23B5A",
-              lineHeight: 1.25,
-            }}
-          >
-            Той салтанаты:
-          </h2>
+        <div style={{ position: 'absolute', top: 16, right: 8, opacity: 0.25, pointerEvents: 'none' }}>
+          <RoseDecoration width={52} count={2} opacity={1} flip />
         </div>
 
-        {/* Calendar card */}
-        <div
-          className="rounded-2xl overflow-hidden mx-auto"
+        {/* Gold top border */}
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+          background: 'linear-gradient(90deg, transparent, #D4AF37 20%, #f5e070 50%, #D4AF37 80%, transparent)',
+        }} />
+
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="float-anim"
           style={{
-            maxWidth: 344,
-            boxShadow: "0 4px 24px rgba(194,59,90,0.14)",
-            border: "1.5px solid rgba(194,59,90,0.18)",
+            fontFamily: "'Great Vibes', cursive",
+            fontSize: 'clamp(2.2rem, 9vw, 3rem)',
+            color: '#D4AF37',
+            textAlign: 'center',
+            lineHeight: 1.2,
+            marginBottom: 32,
           }}
         >
-          {/* Calendar header bar */}
-          <div
-            className="py-3 px-4 text-center"
-            style={{ backgroundColor: "#C23B5A" }}
-          >
-            <span
-              className="uppercase font-semibold text-white tracking-widest"
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "0.92rem",
-                letterSpacing: "0.2em",
-              }}
-            >
-              МАМЫР 2026
-            </span>
+          Той салтанаты:
+        </motion.h2>
+
+        {/* Calendar card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          style={{
+            width: '100%',
+            maxWidth: 344,
+            borderRadius: 16,
+            overflow: 'hidden',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.3)',
+            backgroundColor: '#FFFFFF',
+          }}
+        >
+          {/* Calendar header */}
+          <div style={{
+            padding: '12px 16px',
+            textAlign: 'center',
+            backgroundColor: '#C23B5A',
+          }}>
+            <span style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: '0.92rem',
+              letterSpacing: '0.2em',
+              color: '#FFFFFF',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+            }}>МАМЫР 2026</span>
           </div>
 
           {/* Day-of-week headers */}
-          <div
-            className="grid grid-cols-7 py-2 px-3"
-            style={{ backgroundColor: "rgba(194,59,90,0.07)" }}
-          >
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(7, 1fr)',
+            padding: '8px 12px',
+            backgroundColor: 'rgba(194,59,90,0.07)',
+          }}>
             {DAY_HEADERS.map((d) => (
-              <div
-                key={d}
-                className="text-center text-xs font-semibold py-1"
-                style={{
-                  color: "#C23B5A",
-                  fontFamily: "'Playfair Display', serif",
-                  letterSpacing: "0.04em",
-                }}
-              >
-                {d}
-              </div>
+              <div key={d} style={{
+                textAlign: 'center',
+                padding: '4px 0',
+                fontFamily: "'Playfair Display', serif",
+                fontSize: '0.72rem',
+                fontWeight: 600,
+                color: '#C23B5A',
+                letterSpacing: '0.04em',
+              }}>{d}</div>
             ))}
           </div>
 
           {/* Calendar grid */}
-          <div className="grid grid-cols-7 gap-px px-3 py-3" style={{ backgroundColor: "#fff" }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(7, 1fr)',
+            gap: 2,
+            padding: '12px',
+            backgroundColor: '#fff',
+          }}>
             {MAY_2026_DAYS.map((day, idx) => (
-              <div
-                key={idx}
-                className="aspect-square flex items-center justify-center rounded-full text-sm"
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  ...(day === HIGHLIGHT_DAY
-                    ? {
-                        backgroundColor: "#C23B5A",
-                        color: "#FFFFFF",
-                        fontWeight: 700,
-                        boxShadow: "0 2px 10px rgba(194,59,90,0.5)",
-                        fontSize: "0.95rem",
-                      }
-                    : {
-                        color: day ? "#2C1810" : "transparent",
-                        fontWeight: 400,
-                      }),
-                }}
-              >
-                {day ?? ""}
-              </div>
+              <div key={idx} style={{
+                aspectRatio: '1',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '50%',
+                fontFamily: "'Playfair Display', serif",
+                fontSize: '0.85rem',
+                ...(day === HIGHLIGHT_DAY ? {
+                  backgroundColor: '#C23B5A',
+                  color: '#FFFFFF',
+                  fontWeight: 700,
+                  boxShadow: '0 2px 10px rgba(194,59,90,0.5)',
+                } : {
+                  color: day ? '#2C1810' : 'transparent',
+                  fontWeight: 400,
+                }),
+              }}>{day ?? ''}</div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Time display */}
-        <div className="text-center mt-5 mb-2">
-          <p
-            className="tracking-widest font-semibold"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(1rem, 4.2vw, 1.3rem)",
-              color: "#2C1810",
-              letterSpacing: "0.22em",
-            }}
-          >
-            САҒ. 18:00-ДЕ
-          </p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(1.1rem, 5vw, 1.5rem)',
+            color: '#D4AF37',
+            letterSpacing: '0.22em',
+            textAlign: 'center',
+            fontWeight: 600,
+            marginTop: 28,
+            textTransform: 'uppercase',
+          }}
+        >
+          САҒ. 18:00-ДЕ
+        </motion.p>
+
+        {/* Gold bottom border */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: 3,
+          background: 'linear-gradient(90deg, transparent, #D4AF37 20%, #f5e070 50%, #D4AF37 80%, transparent)',
+        }} />
+      </section>
+
+      {/* Part B - Cream background: Мекен-жайымыз */}
+      <section style={{
+        minHeight: '100svh',
+        backgroundColor: '#FFF8F0',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '48px 24px',
+      }}>
+        {/* Corner rose decorations */}
+        <div style={{ position: 'absolute', top: 16, left: 8, opacity: 0.5, pointerEvents: 'none' }}>
+          <RoseDecoration width={52} count={2} opacity={1} />
+        </div>
+        <div style={{ position: 'absolute', top: 16, right: 8, opacity: 0.5, pointerEvents: 'none' }}>
+          <RoseDecoration width={52} count={2} opacity={1} flip />
+        </div>
+        <div style={{ position: 'absolute', bottom: 24, left: 8, opacity: 0.35, pointerEvents: 'none' }}>
+          <RoseDecoration width={44} count={2} opacity={1} />
+        </div>
+        <div style={{ position: 'absolute', bottom: 24, right: 8, opacity: 0.35, pointerEvents: 'none' }}>
+          <RoseDecoration width={44} count={2} opacity={1} flip />
         </div>
 
-        {/* Ornamental divider */}
-        <div className="ornamental-divider max-w-[200px] mx-auto my-7">
-          <span style={{ color: "#D4AF37", fontSize: "1.1rem" }}>✦</span>
-        </div>
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="rose-shimmer"
+          style={{
+            fontFamily: "'Great Vibes', cursive",
+            fontSize: 'clamp(2rem, 8vw, 2.5rem)',
+            color: '#C23B5A',
+            textAlign: 'center',
+            lineHeight: 1.25,
+            marginBottom: 24,
+          }}
+        >
+          Мекен-жайымыз:
+        </motion.h2>
 
-        {/* Venue heading */}
-        <div className="text-center mb-4">
-          <h2
-            style={{
-              fontFamily: "'Great Vibes', cursive",
-              fontSize: "clamp(1.7rem, 6.8vw, 2.3rem)",
-              color: "#C23B5A",
-              lineHeight: 1.25,
-            }}
-          >
-            Мекен-жайымыз:
-          </h2>
-        </div>
+        {/* Gold divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          style={{
+            width: 160,
+            height: 1,
+            background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)',
+            marginBottom: 28,
+          }}
+        />
 
         {/* Venue name */}
-        <div className="text-center mb-7">
-          <p
-            className="font-medium"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(0.95rem, 3.8vw, 1.12rem)",
-              color: "#2C1810",
-              lineHeight: 1.7,
-            }}
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ textAlign: 'center', marginBottom: 36 }}
+        >
+          <p style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(1rem, 4vw, 1.2rem)',
+            color: '#2C1810',
+            lineHeight: 1.7,
+            fontWeight: 500,
+          }}>
             «Бәйтерек сарайы»<br />мейрамханасы
           </p>
-        </div>
+        </motion.div>
 
-        {/* 2GIS map button */}
-        <div className="flex justify-center">
+        {/* 2GIS button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           <a
-            href="https://2gis.kz"
+            href="https://2gis.kz/astana/geo/70000001083013833"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{
-              backgroundColor: "#C23B5A",
-              color: "#FFFFFF",
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '14px 32px',
+              borderRadius: 9999,
+              backgroundColor: '#C23B5A',
+              color: '#FFFFFF',
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(0.88rem, 3.4vw, 1rem)",
-              letterSpacing: "0.04em",
-              textDecoration: "none",
-              boxShadow: "0 3px 14px rgba(194,59,90,0.32)",
+              fontSize: 'clamp(0.88rem, 3.4vw, 1rem)',
+              letterSpacing: '0.04em',
+              textDecoration: 'none',
+              boxShadow: '0 4px 18px rgba(194,59,90,0.4)',
+              transition: 'transform 0.2s, box-shadow 0.2s',
             }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -187,14 +280,26 @@ const EventDetailsSection = () => {
             </svg>
             2GIS картада көру
           </a>
-        </div>
+        </motion.div>
 
-        {/* Bottom ornament */}
-        <div className="ornamental-divider max-w-[200px] mx-auto mt-9">
-          <span style={{ color: "#C23B5A", fontSize: "1.1rem" }}>❀</span>
-        </div>
-      </div>
-    </section>
+        {/* Bottom rose ornament */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          style={{ marginTop: 40, textAlign: 'center' }}
+        >
+          <div style={{
+            width: 160,
+            height: 1,
+            background: 'linear-gradient(90deg, transparent, #C23B5A, transparent)',
+            margin: '0 auto 8px',
+          }} />
+          <span style={{ color: '#C23B5A', fontSize: '1.1rem' }}>❀</span>
+        </motion.div>
+      </section>
+    </>
   );
 };
 

@@ -1,154 +1,166 @@
-import RoseDecoration from "@/components/RoseDecoration";
+import { motion } from "framer-motion";
+
+const LINES = [
+  'Құрметті',
+  'агайын-туыс, бауырлар,',
+  'құда-жекожат,',
+  'нағашы-жиен, бөлелер,',
+  'құрбы-құрдас,',
+  'дос-жарандар,',
+  'әріптестер, көршілер!',
+];
 
 const InvitationSection = () => {
   return (
-    <section
-      className="relative w-full"
-      style={{
-        backgroundColor: "#FFFFFF",
-        fontFamily: "'Playfair Display', serif",
-        minHeight: '100svh',
+    <section style={{
+      minHeight: '100svh',
+      backgroundColor: '#FFFFFF',
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      {/* Top rose watercolor band */}
+      <div style={{
+        width: '100%',
+        height: 130,
+        background: 'linear-gradient(180deg, #C23B5A 0%, #e06080 40%, #f4b8c8 75%, transparent 100%)',
+        position: 'relative',
+        flexShrink: 0,
+      }}>
+        {/* Gold bottom edge */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: 3,
+          background: 'linear-gradient(90deg, transparent, #D4AF37 20%, #f5e070 50%, #D4AF37 80%, transparent)',
+        }} />
+        {/* Corner roses - left */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          style={{ position: 'absolute', top: 10, left: 8 }}
+        >
+          <RoseCluster />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          style={{ position: 'absolute', top: 10, right: 8 }}
+        >
+          <RoseCluster flip />
+        </motion.div>
+      </div>
+
+      {/* Main content */}
+      <div style={{
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-      }}
-    >
-      {/* Watercolor rose header splash */}
-      <div className="relative w-full overflow-hidden" style={{ minHeight: 180 }}>
-        <svg
-          viewBox="0 0 480 180"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-          preserveAspectRatio="xMidYMid slice"
-          style={{ display: "block", maxHeight: 220 }}
-        >
-          <defs>
-            <radialGradient id="roseWash1" cx="25%" cy="35%" r="65%">
-              <stop offset="0%" stopColor="#C23B5A" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#d96080" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-            </radialGradient>
-            <radialGradient id="roseWash2" cx="78%" cy="30%" r="55%">
-              <stop offset="0%" stopColor="#C23B5A" stopOpacity="0.4" />
-              <stop offset="60%" stopColor="#f0a0b4" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-            </radialGradient>
-            <radialGradient id="roseWash3" cx="55%" cy="70%" r="40%">
-              <stop offset="0%" stopColor="#C23B5A" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-            </radialGradient>
-            <linearGradient id="goldGlitter" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
-              <stop offset="15%" stopColor="#D4AF37" stopOpacity="0.6" />
-              <stop offset="35%" stopColor="#f5e070" stopOpacity="0.95" />
-              <stop offset="50%" stopColor="#D4AF37" stopOpacity="1" />
-              <stop offset="65%" stopColor="#f5e070" stopOpacity="0.95" />
-              <stop offset="85%" stopColor="#D4AF37" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <rect width="480" height="180" fill="url(#roseWash1)" />
-          <rect width="480" height="180" fill="url(#roseWash2)" />
-          <rect width="480" height="180" fill="url(#roseWash3)" />
-          {/* Gold glitter bottom edge */}
-          <rect x="0" y="166" width="480" height="4" fill="url(#goldGlitter)" opacity="0.95" />
-          <rect x="0" y="171" width="480" height="2" fill="url(#goldGlitter)" opacity="0.45" />
-          {/* Scattered gold sparkle dots */}
-          {[30, 75, 130, 190, 240, 295, 355, 410, 455].map((cx, i) => (
-            <circle
+        alignItems: 'center',
+        padding: '32px 24px',
+        position: 'relative',
+      }}>
+        {/* Side rose decorations */}
+        <div className="float-anim" style={{ position: 'absolute', left: 4, top: '15%', opacity: 0.55 }}>
+          <RoseCluster size={50} />
+        </div>
+        <div className="float-anim" style={{ position: 'absolute', right: 4, top: '35%', opacity: 0.45, animationDelay: '2s' }}>
+          <RoseCluster size={42} flip />
+        </div>
+        <div className="float-anim" style={{ position: 'absolute', left: 4, bottom: '15%', opacity: 0.35, animationDelay: '1s' }}>
+          <RoseCluster size={36} />
+        </div>
+
+        {/* Greeting lines - stagger animate */}
+        <div style={{ textAlign: 'center', marginBottom: 20 }}>
+          {LINES.map((line, i) => (
+            <motion.p
               key={i}
-              cx={cx}
-              cy={166 + (i % 3 === 0 ? -5 : i % 3 === 1 ? 0 : 3)}
-              r={i % 2 === 0 ? 2 : 1.2}
-              fill="#D4AF37"
-              opacity={0.85}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: i * 0.12, duration: 0.7, ease: 'easeOut' }}
+              style={{
+                fontFamily: "'Great Vibes', cursive",
+                fontSize: i === 0 ? 'clamp(2rem, 8vw, 2.4rem)' : 'clamp(1.4rem, 6vw, 1.9rem)',
+                color: '#C23B5A',
+                lineHeight: 1.7,
+                margin: 0,
+              }}
+            >
+              {line}
+            </motion.p>
           ))}
-        </svg>
-
-        {/* Corner rose decorations */}
-        <div className="absolute top-3 left-3" style={{ pointerEvents: "none" }}>
-          <RoseDecoration width={65} count={2} opacity={0.72} />
-        </div>
-        <div className="absolute top-3 right-3" style={{ pointerEvents: "none" }}>
-          <RoseDecoration width={65} count={2} opacity={0.72} flip />
-        </div>
-      </div>
-
-      {/* Main invitation content */}
-      <div
-        className="relative mx-auto px-8 py-8 text-center"
-        style={{ maxWidth: 480 }}
-      >
-        {/* Rose side decoration left */}
-        <div className="absolute left-0 top-6" style={{ pointerEvents: "none" }}>
-          <RoseDecoration width={44} count={3} opacity={0.48} />
-        </div>
-        {/* Rose side decoration right */}
-        <div className="absolute right-0 top-6" style={{ pointerEvents: "none" }}>
-          <RoseDecoration width={44} count={3} opacity={0.48} flip />
         </div>
 
-        {/* Greeting text in Great Vibes script */}
-        <p
-          className="leading-loose mb-6"
-          style={{
-            fontFamily: "'Great Vibes', cursive",
-            fontSize: "clamp(1.3rem, 5.5vw, 1.7rem)",
-            color: "#C23B5A",
-            lineHeight: 1.95,
-          }}
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ width: 180, height: 1, background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)', margin: '16px auto' }}
+        />
+        <motion.span
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          style={{ color: '#D4AF37', fontSize: '1.2rem', display: 'block', textAlign: 'center', marginTop: -12, marginBottom: 8 }}
+        >✦</motion.span>
+
+        {/* СІЗДЕРДІ block */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: 'center', marginBottom: 8 }}
         >
-          Құрметті<br />
-          агайын-туыс, бауырлар,<br />
-          құда-жекожат,<br />
-          нағашы-жиен, бөлелер,<br />
-          құрбы-құрдас,<br />
-          дос-жарандар,<br />
-          әріптестер, көршілер!
-        </p>
-
-        {/* Ornamental divider */}
-        <div className="ornamental-divider max-w-[180px] mx-auto my-5">
-          <span style={{ color: "#D4AF37", fontSize: "1rem" }}>✦</span>
-        </div>
-
-        {/* "СІЗДЕРДІ / АЯУЛЫ АНАМЫЗ" in uppercase Playfair */}
-        <p
-          className="uppercase mb-3"
-          style={{
+          <p style={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(0.82rem, 3.2vw, 0.98rem)",
-            color: "#2C1810",
-            letterSpacing: "0.22em",
-            lineHeight: 1.8,
-          }}
-        >
-          СІЗДЕРДІ<br />АЯУЛЫ АНАМЫЗ
-        </p>
+            fontSize: 'clamp(0.75rem, 3.2vw, 0.9rem)',
+            letterSpacing: '0.25em',
+            color: '#2C1810',
+            lineHeight: 2,
+          }}>СІЗДЕРДІ<br />АЯУЛЫ АНАМЫЗ</p>
+        </motion.div>
 
-        {/* Name in Great Vibes - gold shimmer */}
-        <h2
-          className="gold-shimmer mb-3"
+        {/* Name */}
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.85 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="pulse-gold"
           style={{
             fontFamily: "'Great Vibes', cursive",
-            fontSize: "clamp(2.5rem, 11vw, 3.6rem)",
-            color: "#D4AF37",
-            lineHeight: 1.15,
+            fontSize: 'clamp(2.6rem, 12vw, 4rem)',
+            color: '#D4AF37',
+            textAlign: 'center',
+            lineHeight: 1.1,
+            margin: '4px 0 16px',
           }}
         >
           Гүлсараның 75 жас
-        </h2>
+        </motion.h2>
 
-        {/* Subtitle uppercase Playfair */}
-        <p
-          className="uppercase leading-relaxed mt-4"
+        {/* Invitation text */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           style={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(0.78rem, 3vw, 0.94rem)",
-            color: "#2C1810",
-            letterSpacing: "0.18em",
-            lineHeight: 2,
+            fontSize: 'clamp(0.72rem, 3vw, 0.88rem)',
+            letterSpacing: '0.15em',
+            color: '#2C1810',
+            textAlign: 'center',
+            lineHeight: 2.1,
+            textTransform: 'uppercase',
           }}
         >
           МЕРЕЙТОЙЫНА АРНАЛҒАН<br />
@@ -156,15 +168,43 @@ const InvitationSection = () => {
           ДАСТАРХАНЫМЫЗДЫҢ<br />
           ҚАДІРЛІ ҚОНАҒЫ<br />
           БОЛУҒА ШАҚЫРАМЫЗ!
-        </p>
+        </motion.p>
 
         {/* Bottom ornament */}
-        <div className="ornamental-divider max-w-[180px] mx-auto mt-7">
-          <span style={{ color: "#C23B5A", fontSize: "1.1rem" }}>❀</span>
-        </div>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ width: 160, height: 1, background: 'linear-gradient(90deg, transparent, #C23B5A, transparent)', margin: '20px auto 0' }}
+        />
+        <span style={{ color: '#C23B5A', fontSize: '1rem', display: 'block', textAlign: 'center', marginTop: -8 }}>❀</span>
       </div>
     </section>
   );
 };
+
+// Simple inline rose cluster SVG
+const RoseCluster = ({ size = 60, flip = false }: { size?: number; flip?: boolean }) => (
+  <svg width={size} height={size * 1.6} viewBox="0 0 60 96" fill="none" xmlns="http://www.w3.org/2000/svg"
+    style={{ transform: flip ? 'scaleX(-1)' : undefined }}>
+    {/* Rose 1 - top */}
+    <g transform="translate(30,20)">
+      {[0,72,144,216,288].map((a,i) => <ellipse key={i} cx="0" cy="-10" rx="7" ry="12" fill="#C23B5A" opacity="0.85" transform={`rotate(${a})`} />)}
+      {[36,108,180,252,324].map((a,i) => <ellipse key={i} cx="0" cy="-7" rx="5" ry="9" fill="#C23B5A" transform={`rotate(${a})`} />)}
+      <circle cx="0" cy="0" r="5" fill="#8B1A2E"/>
+    </g>
+    {/* Stem */}
+    <line x1="30" y1="30" x2="28" y2="92" stroke="#3D6B28" strokeWidth="2" strokeLinecap="round"/>
+    {/* Leaf */}
+    <path d="M29,52 C18,46 12,56 16,66 C22,58 26,54 29,53Z" fill="#4A8038"/>
+    <path d="M29,68 C40,62 46,72 42,82 C36,74 32,70 29,69Z" fill="#3D6B28"/>
+    {/* Rose 2 - small offset */}
+    <g transform="translate(14,44)">
+      {[0,72,144,216,288].map((a,i) => <ellipse key={i} cx="0" cy="-8" rx="5" ry="9" fill="#e06080" opacity="0.75" transform={`rotate(${a})`} />)}
+      <circle cx="0" cy="0" r="4" fill="#8B1A2E"/>
+    </g>
+  </svg>
+);
 
 export default InvitationSection;
