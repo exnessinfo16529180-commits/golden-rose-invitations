@@ -17,6 +17,8 @@ const EventDetailsSection = () => {
       <img
         src={import.meta.env.BASE_URL + "invite-2.png"}
         alt="Той салтанаты"
+        loading="lazy"
+        decoding="async"
         style={{
           width: "100%",
           maxWidth: 480,

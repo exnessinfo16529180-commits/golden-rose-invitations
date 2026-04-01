@@ -5,9 +5,6 @@ import RoseDecoration from "@/components/RoseDecoration";
 
 type AttendingOption = "yes" | "with-spouse" | "no";
 
-// Замените на URL вашего Google Apps Script Web App
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/PASTE_YOUR_SCRIPT_ID_HERE/exec";
-
 const TG_TOKEN = "8755824802:AAGHYK6K13ZCxdmjajg5YGhpuwg2YIeJxeQ";
 const TG_RECIPIENTS = ["7985823818", "673096238"];
 

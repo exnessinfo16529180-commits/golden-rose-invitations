@@ -46,7 +46,7 @@ const MusicPlayer = () => {
         ref={audioRef}
         src={import.meta.env.BASE_URL + "music.mp3"}
         loop
-        preload="auto"
+        preload="none"
       />
 
       {/* Floating button */}

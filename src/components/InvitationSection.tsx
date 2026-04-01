@@ -17,6 +17,8 @@ const InvitationSection = () => {
       <img
         src={import.meta.env.BASE_URL + "invite-1.png"}
         alt="Приглашение"
+        loading="eager"
+        decoding="async"
         style={{
           width: "100%",
           maxWidth: 480,

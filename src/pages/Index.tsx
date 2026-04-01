@@ -7,7 +7,6 @@ import EventDetailsSection from "@/components/EventDetailsSection";
 import RsvpSection from "@/components/RsvpSection";
 import AddressSection from "@/components/AddressSection";
 import FloatingPetals from "@/components/FloatingPetals";
-import KazakhOrnamentBg from "@/components/KazakhOrnament";
 import ScrollReveal from "@/components/ScrollReveal";
 import MusicPlayer from "@/components/MusicPlayer";
 
@@ -19,6 +18,13 @@ const Index = () => {
   const handleVideoEnd = useCallback(() => {
     setHeroPhase(2);
   }, []);
+
+  const handleHeroTap = useCallback(() => {
+    if (heroPhase === 2) {
+      setHeroPhase(3);
+      setScrollUnlocked(true);
+    }
+  }, [heroPhase]);
 
   useEffect(() => {
     if (heroPhase !== 2) return;
@@ -71,12 +77,11 @@ const Index = () => {
   return (
     <div className="relative min-h-screen" style={{ backgroundColor: scrollUnlocked ? '#FFFFFF' : '#1a0f0a' }}>
       <MusicPlayer />
-      <HeroSection phase={heroPhase} onVideoEnd={handleVideoEnd} />
+      <HeroSection phase={heroPhase} onVideoEnd={handleVideoEnd} onTap={handleHeroTap} />
 
       {scrollUnlocked && (
         <div ref={contentRef} className="relative" style={{ backgroundColor: '#FFFFFF' }}>
           <FloatingPetals />
-          <KazakhOrnamentBg />
 
           <ScrollReveal>
             <InvitationSection />

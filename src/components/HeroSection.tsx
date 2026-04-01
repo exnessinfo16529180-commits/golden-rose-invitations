@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 interface HeroSectionProps {
   phase: 1 | 2 | 3;
   onVideoEnd: () => void;
+  onTap?: () => void;
 }
 
-const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
+const HeroSection = ({ phase, onVideoEnd, onTap }: HeroSectionProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
     <div
       className="relative h-screen w-full overflow-hidden"
       style={{ backgroundColor: '#1a0f0a' }}
-      onClick={phase === 1 ? onVideoEnd : undefined}
+      onClick={phase === 1 ? onVideoEnd : phase === 2 ? onTap : undefined}
     >
       {/* Phase 1: Video */}
       <AnimatePresence>
