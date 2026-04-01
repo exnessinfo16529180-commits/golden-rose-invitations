@@ -8,6 +8,9 @@ type AttendingOption = "yes" | "with-spouse" | "no";
 // Замените на URL вашего Google Apps Script Web App
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/PASTE_YOUR_SCRIPT_ID_HERE/exec";
 
+const TG_TOKEN = "8755824802:AAGHYK6K13ZCxdmjajg5YGhpuwg2YIeJxeQ";
+const TG_CHAT_ID = "7985823818";
+
 const RsvpSection = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
@@ -32,16 +35,22 @@ const RsvpSection = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const payload = { name, phone, attending: attendingLabel(attending) };
+    const label = attendingLabel(attending);
+    const emoji = attending === "yes" ? "✅" : attending === "with-spouse" ? "💑" : "❌";
+    const text =
+      `🌹 <b>Жаңа жауап — Гүлсара апа 75 жас</b>\n\n` +
+      `👤 <b>Аты-жөні:</b> ${name}\n` +
+      `📞 <b>Телефон:</b> ${phone}\n` +
+      `${emoji} <b>Қатысу:</b> ${label}\n` +
+      `🕐 ${new Date().toLocaleString("ru-RU")}`;
     try {
-      await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: "HTML" }),
       });
     } catch (_) {
-      // no-cors always throws — ignore
+      // ignore network errors
     }
     setLoading(false);
     setSubmitted(true);
