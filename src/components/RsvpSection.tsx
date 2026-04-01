@@ -9,7 +9,7 @@ type AttendingOption = "yes" | "with-spouse" | "no";
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/PASTE_YOUR_SCRIPT_ID_HERE/exec";
 
 const TG_TOKEN = "8755824802:AAGHYK6K13ZCxdmjajg5YGhpuwg2YIeJxeQ";
-const TG_CHAT_ID = "7985823818";
+const TG_RECIPIENTS = ["7985823818", "673096238"];
 
 const RsvpSection = () => {
   const { toast } = useToast();
@@ -44,11 +44,13 @@ const RsvpSection = () => {
       `${emoji} <b>Қатысу:</b> ${label}\n` +
       `🕐 ${new Date().toLocaleString("ru-RU")}`;
     try {
-      await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: "HTML" }),
-      });
+      await Promise.all(TG_RECIPIENTS.map(chat_id =>
+        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id, text, parse_mode: "HTML" }),
+        })
+      ));
     } catch (_) {
       // ignore network errors
     }

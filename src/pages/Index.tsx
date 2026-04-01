@@ -5,6 +5,7 @@ import CountdownSection from "@/components/CountdownSection";
 import InvitationSection from "@/components/InvitationSection";
 import EventDetailsSection from "@/components/EventDetailsSection";
 import RsvpSection from "@/components/RsvpSection";
+import AddressSection from "@/components/AddressSection";
 import FloatingPetals from "@/components/FloatingPetals";
 import KazakhOrnamentBg from "@/components/KazakhOrnament";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -81,6 +82,10 @@ const Index = () => {
 
           <ScrollReveal>
             <EventDetailsSection />
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <AddressSection />
           </ScrollReveal>
 
           <ScrollReveal>
