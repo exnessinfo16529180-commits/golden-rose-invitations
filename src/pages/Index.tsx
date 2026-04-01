@@ -9,6 +9,7 @@ import AddressSection from "@/components/AddressSection";
 import FloatingPetals from "@/components/FloatingPetals";
 import KazakhOrnamentBg from "@/components/KazakhOrnament";
 import ScrollReveal from "@/components/ScrollReveal";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const Index = () => {
   const [heroPhase, setHeroPhase] = useState<1 | 2 | 3>(1);
@@ -69,6 +70,7 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen" style={{ backgroundColor: scrollUnlocked ? '#FFFFFF' : '#1a0f0a' }}>
+      <MusicPlayer />
       <HeroSection phase={heroPhase} onVideoEnd={handleVideoEnd} />
 
       {scrollUnlocked && (
