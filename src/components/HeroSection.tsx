@@ -103,52 +103,29 @@ const HeroSection = ({ phase, onVideoEnd }: HeroSectionProps) => {
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
 
-          {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4">
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-lg md:text-xl tracking-[0.3em] uppercase mb-4"
-              style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
-            >
-              Аяулы анамыз
-            </motion.p>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 1 }}
-              className="text-6xl md:text-8xl lg:text-9xl mb-6 gold-shimmer"
-              style={{ color: '#D4AF37', fontFamily: "'Great Vibes', cursive" }}
-            >
-              Гүлсара
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.8 }}
-              className="text-2xl md:text-3xl tracking-[0.2em]"
-              style={{ color: '#FDF8F0', fontFamily: "'Playfair Display', serif" }}
-            >
-              75 жыл мерейтой
-            </motion.p>
-          </div>
-
-          {/* Scroll indicator */}
+          {/* Tap / scroll indicator */}
           {phase === 2 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 2.5, duration: 0.8 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 px-4 text-center"
             >
-              <span className="text-xs tracking-[0.2em] uppercase" style={{ color: '#D4AF37' }}>
-                Төменге сырғытыңыз
-              </span>
+              <motion.p
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: 'clamp(0.85rem, 3.5vw, 1rem)',
+                  color: '#D4AF37',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Пригласительді ашу үшін экранды басыңыз
+              </motion.p>
               <div className="bounce-arrow" style={{ color: '#D4AF37' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
