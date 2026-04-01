@@ -60,7 +60,6 @@ const HeroSection = ({ phase, onVideoEnd, onTap }: HeroSectionProps) => {
     <div
       className="relative h-screen w-full overflow-hidden"
       style={{ backgroundColor: '#1a0f0a' }}
-      onClick={phase === 1 ? onVideoEnd : phase === 2 ? onTap : undefined}
     >
       {/* Phase 1: Video */}
       <AnimatePresence>
@@ -96,7 +95,7 @@ const HeroSection = ({ phase, onVideoEnd, onTap }: HeroSectionProps) => {
 
       {/* Phase 2 & 3: Static Image with text */}
       {phase >= 2 && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-0" onClick={phase === 2 ? onTap : undefined}>
           <div className="absolute inset-0 hero-image-zoom">
             <img
               src={import.meta.env.BASE_URL + "hero-portrait.png"}
@@ -125,7 +124,7 @@ const HeroSection = ({ phase, onVideoEnd, onTap }: HeroSectionProps) => {
                   textTransform: 'uppercase',
                 }}
               >
-                Пригласительді ашу үшін экранды басыңыз
+                Шақыру билетін ашу үшін экранды басыңыз
               </motion.p>
               <div className="bounce-arrow" style={{ color: '#D4AF37' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

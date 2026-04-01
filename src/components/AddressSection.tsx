@@ -14,6 +14,58 @@ const AddressSection = () => {
     }}>
       <div style={{ maxWidth: 420, width: '100%', textAlign: 'center' }}>
 
+        {/* Той иелері */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          style={{ marginBottom: 36 }}
+        >
+          {/* Decorative line */}
+          <div style={{
+            width: 60, height: 1,
+            background: 'linear-gradient(90deg, transparent, #D4AF37)',
+            margin: '0 auto 16px',
+          }} />
+
+          <motion.p
+            animate={{ opacity: [0.75, 1, 0.75] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontSize: 'clamp(1.8rem, 7vw, 2.4rem)',
+              color: '#C23B5A',
+              lineHeight: 1.3,
+              marginBottom: 4,
+            }}
+          >
+            Той иелері
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: '0.1em' }}
+            whileInView={{ opacity: 1, letterSpacing: '0.22em' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.3 }}
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(0.75rem, 3vw, 0.9rem)',
+              color: '#2C1810',
+              textTransform: 'uppercase',
+              letterSpacing: '0.22em',
+            }}
+          >
+            ұл-қыздары
+          </motion.p>
+
+          {/* Decorative line */}
+          <div style={{
+            width: 60, height: 1,
+            background: 'linear-gradient(90deg, #D4AF37, transparent)',
+            margin: '16px auto 0',
+          }} />
+        </motion.div>
+
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
